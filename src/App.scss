@@ -1,0 +1,62 @@
+
+// @import "node_modules/bulmaswatch/darkly/bulmaswatch";
+// @import "node_modules/bulmaswatch/journal/bulmaswatch";
+// @import "node_modules/bulmaswatch/default/bulmaswatch";
+// @import "node_modules/bulmaswatch/lumen/bulmaswatch";
+// @import "node_modules/bulmaswatch/minty/bulmaswatch";
+// @import "node_modules/bulmaswatch/litera/bulmaswatch";
+// @import "node_modules/bulmaswatch/lux/bulmaswatch";
+// @import "node_modules/bulmaswatch/materia/bulmaswatch";
+
+// $footer-padding: 0.3rem 1.5rem .3rem;
+$column-gap: 0.5rem;
+$box-padding: 0.2rem;
+
+@import "node_modules/bulmaswatch/materia/bulmaswatch";
+
+body {
+	background: lightblue url("appBacground.jpg") repeat fixed center;
+	position: absolute; 
+	top: 0; 
+	left: 0;
+	width: 100%; 
+	min-height: 100%;
+	height: auto;
+	// font-weight: 500;
+}
+
+.topGapo{
+	padding: 8px;
+}
+
+.navbar-dropdown {
+	left: -150%;
+}
+
+.footko {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: rgb(106, 191, 176);
+	color: whitesmoke;
+	text-align: center;
+}
+
+// // Import only what you need from Bulma
+// @import "../node_modules/bulma/sass/utilities/_all.sass";
+// @import "../node_modules/bulma/sass/base/_all.sass";
+// @import "../node_modules/bulma/sass/elements/button.sass";
+// @import "../node_modules/bulma/sass/elements/container.sass";
+// @import "../node_modules/bulma/sass/elements/title.sass";
+// @import "../node_modules/bulma/sass/form/_all.sass";
+// @import "../node_modules/bulma/sass/components/navbar.sass";
+// @import "../node_modules/bulma/sass/layout/hero.sass";
+// @import "../node_modules/bulma/sass/layout/section.sass";
+
+// font-family: 'Indie Flower', cursive;
+// font-family: 'Caveat', cursive;
+// font-family: 'Noto Serif', serif;
+// font-family: 'Open Sans Condensed', sans-serif;
+// font-family: 'Gloria Hallelujah', cursive;
+// font-family: 'Roboto Mono', monospace;
