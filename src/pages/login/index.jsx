@@ -11,7 +11,7 @@ const LoginForm = () => {
 	const dispatch = useDispatch();
 	const [data, setData] = useState({user:'', password:''});
 	const isLoggedIn = useIsLoggedIn(); 
-	const { firstName, secondName } = useUserTitles();
+	const { firstName, secondName, userName } = useUserTitles();
 	const [fly, setFly] = useState({ flayable: false, loginError: false, inputBox: true }); 
 	const [ ttls, setTtls] = useState({ logIn: "User Login", logOut: "Customer" });
 	
@@ -59,23 +59,25 @@ const LoginForm = () => {
 
 	if(!isLoggedIn)
 		return (
-		<form>
-			<div className={classNames(fly)} onKeyDown={(evn) => keyHandle(evn)}>
-				<div className="boxTitle">
-					<label>{ttls.logIn}</label>
+		<form style={{maxWidth: '520px'}}>
+			<div className={classNames({fly})} onKeyDown={(evn) => keyHandle(evn)}>
+				<div className="title">
+					{ttls.logIn}
 				</div>
-				<div className={"inputLabel"}>
-					User Name
-					<input type="text" name="user" placeholder="User Name" onChange={onInputChange} value={data.user || ''} />
+				<div className={"field"}>
+					<label>User Name</label>
+					<input className="input" type="text" name="user" placeholder="User Name" onChange={onInputChange} value={data.user || ''} />
 				</div>
-				<div className={"inputLabel"}>
-					Password
-					<input type="text" name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />
+				<div className={"field"}>
+					<label>
+						Password
+					</label>
+					<input className="input" type="text" name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />
 				</div>	
 				{ fly.flayable &&
 					<div className="bottomLine">
-						<div className="subButton submit" onClick={() => submit()}>Login</div>
-						<div className="subButton cancel" onClick={() => cancel()}>Cancel</div>
+						<div className="button is-rounded is-primary" onClick={() => cancel()}>Cancel</div>
+						<div className="button is-rounded" onClick={() => submit()}>Login</div>
 					</div>
 				}
 				 {/* <ReactJson src={fly} />  */}
@@ -84,21 +86,33 @@ const LoginForm = () => {
 		);
 	else
 		return( 
-		<form className='page' >
-			<div className={'inputBox'}>
-				<div className="boxTitle">
-					<label>Customer</label>
-				</div>
-				<div className={"inputLabel"}>
-					User Name
-					<input type="text" name="user" placeholder="User Name" onChange={onInputChange} value={firstName+' '+secondName} disabled />
-				</div>
-				<div className="bottomLine">
-					<div className="subButton submit" onClick={() => logout()} >Logout</div>
-					<div className="subButton cancel" onClick={() => window.location.href = '#/user'} >User data</div>
-				</div>
-			</div>
-		</form> 
+			<form className='form'>
+				<div style={{ maxWidth: '520px'}}>
+					<div className={'inputBox'}>
+						<div className="title">
+							<label>You are signed in as:</label>
+						</div>
+
+						<div className='field'>
+							<label className='label'>
+								User Name
+							</label>
+							<input className="input is-large" disabled type="text" name="user" placeholder="User Name" onChange={onInputChange} value={userName} />
+						</div>
+
+						<div className={"field"}>
+							<label className="label">
+								Name and second name
+							</label>
+							<input className="input is-large" disabled type="text" name="user" placeholder="User Name" onChange={onInputChange} value={firstName+' '+secondName} />
+						</div>
+						<div className="bottomLine">
+							<div className="button is-rounded is-link" onClick={() => logout()} >Logout</div>
+							<div className="button is-rounded" onClick={() => window.location.href = '#/user'} >User data</div>
+						</div>
+					</div>
+				</div> 
+			</form>
 	);
 }
 

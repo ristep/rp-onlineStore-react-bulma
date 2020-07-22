@@ -11,7 +11,7 @@
 $column-gap: 0.5rem;
 $box-padding: 0.2rem;
 
-@import "node_modules/bulmaswatch/lumen/bulmaswatch";
+@import "node_modules/bulmaswatch/default/bulmaswatch";
 
 body {
 	background: lightblue url("appBacground.jpg") repeat fixed center;
@@ -29,7 +29,7 @@ body {
 }
 
 .navbar-dropdown {
-	left: -150%;
+	left: -60%;
 }
 
 .footko {
@@ -40,6 +40,20 @@ body {
 	background-color: rgb(106, 191, 176);
 	color: whitesmoke;
 	text-align: center;
+}
+
+.markdown-body {
+	box-sizing: border-box;
+	min-width: 200px;
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 45px;
+}
+
+@media (max-width: 767px) {
+	.markdown-body {
+		padding: 15px;
+	}
 }
 
 // // Import only what you need from Bulma

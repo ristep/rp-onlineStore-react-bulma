@@ -63,32 +63,36 @@ const SideCart = () => {
 			</div>
 
 			<table className="table is-fullwidth mt-0 mb-0 ">
-				<tr className="th is-selected">
-					<th></th>
-					<th>Prodict</th>
-					<th align="right">Amount</th>
-				</tr>
-				{[...items.map((item, i) =>
-					<tr className="tr" key={i}>
-						<td className='pl-1 mr-0 pr-1'>
-							{TinkiVinki(i,item)}
-						</td>
-						<td className="ml-0 pl-1" >
-							{item.quantity} {item.title}
-						</td>
-						<td align="right">
-							${(item.price*item.quantity).toFixed(2)}
-						</td>
+				<thead>
+					<tr className="th is-selected">
+						<th></th>
+						<th>Foods</th>
+						<th align="right">Amount</th>
 					</tr>
-				)]}
+				</thead>
+				<tbody>
+					{[...items.map((item, i) =>
+						<tr className="tr" key={i}>
+							<td className='pl-1 mr-0 pr-1'>
+								{TinkiVinki(i,item)}
+							</td>
+							<td className="ml-0 pl-1" >
+								{item.quantity} {item.title}
+							</td>
+							<td align="right">
+								${(item.price*item.quantity).toFixed(2)}
+							</td>
+						</tr>
+					)]}
+				</tbody>
 			</table>				
 			<div className="columns mt-2 mb-0 pv-0">
 					<p className="title column mb-0">Total</p>
 					<p className='title column mb-0' align='right'>${amount.toFixed(2)}</p>
 			</div>
 			<div className='buttons is-centered'  style={flex}>
-				<button className='button is-rounded' onClick={() => dispatch(closeCartBox())} >Place an order</button>
 				<button className='button is-rounded is-danger' onClick={() => dispatch(clearCart())} >Empty Cart</button>
+				<button className='button is-rounded is-link' onClick={() => dispatch(closeCartBox())} >Place an order</button>
 			</div>
 			{/* <ReactJson src={items} /> */}
 		</div>

@@ -163,11 +163,11 @@ const UserData = () => {
 					</div>
 					<div>
 						{touched && (
-							<div className="bottomLine">
+							<div className="buttons is-right">
 								<div className="button is-rounded" onClick={() => cancel()}>
 									Cancel
 								</div>
-								<div className="button is-rounded is-primary" onClick={() => submit()}>
+								<div className="button is-rounded is-link" onClick={() => submit()}>
 									Submit
 								</div>
 							</div>

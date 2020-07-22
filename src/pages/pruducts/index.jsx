@@ -26,8 +26,8 @@ function ProductsPage() {
 		<div className="columns is-multiline" >
 			<Favicon url="../pizzaFab.png" />
 			{[...foodsAll.data.map((x, i) =>
-				<div  className="column is-one-third">
-					<Box {...x} key={i} />
+				<div className="column is-one-third" key={i}>
+					<Box {...x} />
 				</div>	
 			)]}
 		</div>

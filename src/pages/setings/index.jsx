@@ -84,7 +84,7 @@ const SetingsPage = () => {
   </div>
 </div>
 
-<div class="field is-grouped">
+<div class="is-grouped buttons is-right">
   <div class="control">
     <button class="button is-link">Submit</button>
   </div>

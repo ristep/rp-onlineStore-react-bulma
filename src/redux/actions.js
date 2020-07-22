@@ -51,6 +51,7 @@ export const closeClearAlert = () => ({ type: CLOSE_CLEAR_ALERT });
 export const openCartBox = () => ({ type: OPEN_CART_BOX });
 export const closeCartBox = () => ({ type: CLOSE_CART_BOX });
 export const toggleCartBox = () => ({ type: TOGGLE_CART_BOX });
+
 export const toggleSidenav = () => ({ type: TOGGLE_SIDENAV });
 
 // token actions async

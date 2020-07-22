@@ -32,10 +32,12 @@ const HomePage = () => {
             This is only test application, you can't order anything on this site :) 
 
 						<hr />
-            <a className="button is-primary" href="#/usersTable">Users Table</a>
-            <a className="button is-primary" href="#/login">Login</a>
-            <a className="button is-primary" href="#/products">Products for ordering</a>
-            <a className="button is-danger" href="https://google.com">google.com</a>
+            <div className='buttons is-centered'>
+              <a className="button is-rounded is-primary" href="#/usersTable">Users Table</a>
+              <a className="button is-rounded is-primary" href="#/login">Login</a>
+              <a className="button is-rounded is-primary" href="#/products">Products for ordering</a>
+              <a className="button is-rounded is-danger"  href="https://pan.sman.cloud" target="#">Pan Sman Cloud</a>
+            </div>
           </div>
         </div>
       </div>

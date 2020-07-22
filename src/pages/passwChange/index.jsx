@@ -75,7 +75,7 @@ const PasswChange = () => {
 
 	return(
 		<form className='page' >
-			<div className='box'>
+			<div style={{ maxWidth: '520px'}}>
 				<div className="title">
 					Change password
 					<span class="icon has-text-danger is-large">
@@ -83,25 +83,34 @@ const PasswChange = () => {
 					</span>	
 				</div>
 				
-				<div className={"inputLabel"}>
-				{currPass.title}
-				<input className={"passw "+currPass.class} ref={curpassEl} type={ okce ? "text":"password"} name="currPassw" placeholder="Current Password" onChange={onInputChange} value={passw.currPassw || ''} />
-			</div>
-			<div className={"inputLabel"}>
-				New password
-				<input className={"passw "+nomatch} type={okce ? "text" : "password"} name="newPasswA" placeholder="New password" onChange={onInputChange} value={passw.newPasswA || ''} />
-			</div>	
-			<div className={"inputLabel"}>
-				Confirm new password
-				<input className={"passw "+nomatch} type={okce ? "text" : "password"} name="newPasswB" placeholder="New password" onChange={onInputChange} value={passw.newPasswB || ''} />
-			</div>
-			{ canFly && 
-				<div className="bottomLine">
-					<div className="subButton submit" onClick={() => submit()}>Submit</div>
-					<div className="subButton cancel" onClick={() => cancel()}>Cancel</div>
+				<div className={"field"}>
+					<label className="label">
+						{currPass.title}
+					</label>	
+					<input className={"input passw "+currPass.class} ref={curpassEl} type={ okce ? "text":"password"} name="currPassw" placeholder="Current Password" onChange={onInputChange} value={passw.currPassw || ''} />
 				</div>
-			}
-			{/* <ReactJson src={ret} /> */}
+
+				<div className={"field"}>
+					<label className="label">
+						New password
+					</label>
+					<input className={"input passw "+nomatch} type={okce ? "text" : "password"} name="newPasswA" placeholder="New password" onChange={onInputChange} value={passw.newPasswA || ''} />
+				</div>	
+
+				<div className={"field"}>
+					<label className="label">
+						Confirm new password
+					</label>
+					<input className={"input passw "+nomatch} type={okce ? "text" : "password"} name="newPasswB" placeholder="New password" onChange={onInputChange} value={passw.newPasswB || ''} />
+				</div>
+
+				{ canFly && 
+					<div className="bottomLine">
+						<div className="button is-rounded" onClick={() => cancel()}>Cancel</div>
+						<div className="button is-rounded is-link" onClick={() => submit()}>Submit</div>
+					</div>
+				}
+				{/* <ReactJson src={ret} /> */}
 			</div>
 		</form>
 	);

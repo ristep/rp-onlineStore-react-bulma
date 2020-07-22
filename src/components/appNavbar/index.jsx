@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import { getCartDataSet } from "redux/selectors";
 import { useIsLoggedIn, useUserTitles } from "redux/selectorHooks";
 import Logo from "elements/logo";
+import { toggleCartBox } from "redux/actions";
 
 const AppNavBar = (props) => {
-  const {children} = props;
+  const { children } = props;
   const loginOK = useIsLoggedIn();
   const { amount } = useSelector(getCartDataSet);
   const [menu, setMenu] = useState("");
@@ -28,7 +29,8 @@ const AppNavBar = (props) => {
     <div>
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Logo /><p>{menu}</p>
+          <Logo />
+          <p>{menu}</p>
           <div
             className={"navbar-burger"}
             aria-label="menu"
@@ -42,12 +44,24 @@ const AppNavBar = (props) => {
           </div>
         </div>
 
-        <div id="navbarMain" className={"navbar-menu " + menu}  onClick={() => navClickHandle()}>
+        <div
+          id="navbarMain"
+          className={"navbar-menu " + menu}
+          onClick={() => navClickHandle()}
+        >
           <div className="navbar-start">
-            <a className="navbar-item" href="#/home">Home</a>
-            <a className="navbar-item" href="#/products" >Products</a>
-            <a className="navbar-item" href="#/cart"> {"Cart: $" + amount.toFixed(2)} </a>
-            <a className="navbar-item" href="#/about">About</a>
+            <a className="navbar-item" href="#/home">
+              Home
+            </a>
+            <a className="navbar-item" href="#/products">
+              Products
+            </a>
+            <a className="navbar-item" onClick={() => toggleCartBox()}>
+              {"Cart: $" + amount.toFixed(2)}{" "}
+            </a>
+            <a className="navbar-item" href="#/about">
+              About
+            </a>
           </div>
 
           <div className="navbar-end">
@@ -55,34 +69,39 @@ const AppNavBar = (props) => {
               <div className="navbar-item has-dropdown is-hoverable">
                 <div className="navbar-link">{userName}</div>
                 <div className="navbar-dropdown">
-                  <p className="title navbar-item">
+                  {/* <span className="navbar-item">
                     {firstName} {secondName}
-                  </p>
-                  <a
-                    className="navbar-item"
-                    label="Settings"
-                    href="#/setings"
-                  >
-                    Settings
-                  </a>
-                  <a
-                    className="navbar-item"
-                    label="User"
-                    href="#/user"
-                  >
+                  </span> */}
+
+                  <a className="navbar-item" label="User" href="#/user">
                     Profile
                   </a>
+                  {/* <hr className="navbar-divider" /> */}
+                  <a className="navbar-item" label="Settings" href="#/setings">
+                    Settings
+                  </a>
+
+                  <a
+                    className="navbar-item"
+                    label="Password"
+                    href="#/passwChange"
+                  >
+                    Change Password
+                  </a>
+
+                  <a className="navbar-item" href="#/report">
+                    Say something
+                  </a>
                   <hr className="navbar-divider" />
-                  <a className="navbar-item" href="#/report">Report an issue</a>
-                  <hr className="navbar-divider" />
-                  <a  className="navbar-item is-primary is-light" href="#/login">
+                  <a className="navbar-item is-primary is-light" href="#/login">
                     LogOut
                   </a>
+
                 </div>
               </div>
             ) : (
               <div className="navbar-item">
-                <a className="navbar-item is-primary is-light" href="#/login" >
+                <a className="navbar-item is-primary is-light" href="#/login">
                   LogIn
                 </a>
               </div>
@@ -97,15 +116,14 @@ const AppNavBar = (props) => {
 
 export default AppNavBar;
 
-
 // code dump
-    // switch (url) {
-    //   case "about":
-    //     dispatch(openAboutDialog());
-    //     break;
-    //   case "cart":
-    //     dispatch(toggleCartBox());
-    //     break;
-    //   default:
-    //     window.location.href = url;
-    // }
+// switch (url) {
+//   case "about":
+//     dispatch(openAboutDialog());
+//     break;
+//   case "cart":
+//     dispatch(toggleCartBox());
+//     break;
+//   default:
+//     window.location.href = url;
+// }

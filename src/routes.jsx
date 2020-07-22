@@ -10,6 +10,7 @@ import { getPage } from "redux/selectors";
 import LoginForm from "pages/login";
 import PasswChange from "pages/passwChange";
 import UsersTable from "pages/usersTable";
+import AboutPage from "pages/about";
 
 export const routes = {
 	home: <HomePage />,
@@ -22,6 +23,7 @@ export const routes = {
 	usersTable: <UsersTable />,
 	users: <UsersTable />,
 	passwChange: <PasswChange />,
+	about: <AboutPage />,
 	errPage: <PageNotFound />,
 };
 
