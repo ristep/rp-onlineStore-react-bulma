@@ -4,13 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Online Store Demo application
 
-## Created with react, redux, and bulma   
-
+Created with react, redux, and bulma   
 
 
 ## Read me from create-react-app
-
-## Available Scripts
 
 In the project directory, you can run:
 
