@@ -1,6 +1,5 @@
 
 // @import "node_modules/bulmaswatch/darkly/bulmaswatch";
-// @import "node_modules/bulmaswatch/journal/bulmaswatch";
 // @import "node_modules/bulmaswatch/default/bulmaswatch";
 // @import "node_modules/bulmaswatch/lumen/bulmaswatch";
 // @import "node_modules/bulmaswatch/minty/bulmaswatch";
@@ -12,7 +11,7 @@
 $column-gap: 0.5rem;
 $box-padding: 0.2rem;
 
-@import "node_modules/bulmaswatch/materia/bulmaswatch";
+@import "node_modules/bulmaswatch/lumen/bulmaswatch";
 
 body {
 	background: lightblue url("appBacground.jpg") repeat fixed center;

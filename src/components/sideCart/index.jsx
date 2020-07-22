@@ -35,7 +35,7 @@ const SideCart = () => {
 	const TinkiVinki = (i,item ) => {
 
 	const tinkiStyle = { 
-			with: `48px`, 
+			with: `12px`, 
 			height: `auto`, 
 			// backgroundImage: `url(${imgUrl+item.imgFileName})`,
 			// backgroundRepeat: `no-repeat`,
@@ -53,7 +53,7 @@ const SideCart = () => {
 	return (
 		<div className='box'>
 
-			<div className="columns">
+			<div className="columns mb-0 mt-1">
 				<div align="left" className="column">
 						<CartLarge style={sliko} />
 				</div>	
@@ -62,18 +62,18 @@ const SideCart = () => {
 				</span>
 			</div>
 
-			<table className="table is-fullwidth">
+			<table className="table is-fullwidth mt-0 mb-0 ">
 				<tr className="th is-selected">
-					<th>Product</th>
 					<th></th>
+					<th>Prodict</th>
 					<th align="right">Amount</th>
 				</tr>
 				{[...items.map((item, i) =>
 					<tr className="tr" key={i}>
-						<td className='is-narrow'>
+						<td className='pl-1 mr-0 pr-1'>
 							{TinkiVinki(i,item)}
 						</td>
-						<td className="td" align={"left"}>
+						<td className="ml-0 pl-1" >
 							{item.quantity} {item.title}
 						</td>
 						<td align="right">
@@ -81,17 +81,14 @@ const SideCart = () => {
 						</td>
 					</tr>
 				)]}
-			<tfoot>
-			 <tr>
-				<td></td> 
-				<td align={'right'}>Total</td>
-				<td align={'right'}>{amount.toFixed(2)}</td>
-				</tr>	
-			</tfoot>	
 			</table>				
+			<div className="columns mt-2 mb-0 pv-0">
+					<p className="title column mb-0">Total</p>
+					<p className='title column mb-0' align='right'>${amount.toFixed(2)}</p>
+			</div>
 			<div className='buttons is-centered'  style={flex}>
 				<button className='button is-rounded' onClick={() => dispatch(closeCartBox())} >Place an order</button>
-				<button className='button is-primary is-rounded is-danger' onClick={() => dispatch(clearCart())} >Empty Cart</button>
+				<button className='button is-rounded is-danger' onClick={() => dispatch(clearCart())} >Empty Cart</button>
 			</div>
 			{/* <ReactJson src={items} /> */}
 		</div>

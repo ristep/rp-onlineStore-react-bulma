@@ -75,11 +75,14 @@ const PasswChange = () => {
 
 	return(
 		<form className='page' >
-			<div className='inputBox'>
-				<div className="boxTitle">
+			<div className='box'>
+				<div className="title">
 					Change password
-					<Icon path={ okce ? mdiEyeOutline : mdiEyeOffOutline } className={"passChangeIcon"} onClick={() => setOkce(!okce)}/>
+					<span class="icon has-text-danger is-large">
+						<i className={ okce ? "far fa-eye" : "far fa-eye-slash" } onClick={() => setOkce(!okce)}></i>
+					</span>	
 				</div>
+				
 				<div className={"inputLabel"}>
 				{currPass.title}
 				<input className={"passw "+currPass.class} ref={curpassEl} type={ okce ? "text":"password"} name="currPassw" placeholder="Current Password" onChange={onInputChange} value={passw.currPassw || ''} />
