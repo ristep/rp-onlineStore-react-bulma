@@ -1,7 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# rp-onlineStore-react-bulma
 
-# Read me from create-react-app
+## Online Store Demo application
+
+## Created with react, redux, and bulma   
+
+## Read me from create-react-app
 
 ## Available Scripts
 
