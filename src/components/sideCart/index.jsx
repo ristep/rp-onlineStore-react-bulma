@@ -77,7 +77,7 @@ const SideCart = () => {
 								{TinkiVinki(i,item)}
 							</td>
 							<td className="ml-0 pl-1" >
-								{item.quantity} {item.title}
+								<a href={"#/product/"+item.id} > {item.quantity} {item.title} </a>
 							</td>
 							<td align="right">
 								${(item.price*item.quantity).toFixed(2)}
