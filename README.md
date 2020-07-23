@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # rp-onlineStore-react-bulma
 
 ### Online Store Demo application
@@ -7,7 +5,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Created with react, redux, and bulma   
 
 
-## Read me from create-react-app
+## ReadMe from create-react-app
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
