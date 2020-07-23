@@ -14,7 +14,8 @@ const LoginForm = () => {
 	const { firstName, secondName, userName } = useUserTitles();
 	const [fly, setFly] = useState({ flayable: false, loginError: false, inputBox: true }); 
 	const [ ttls, setTtls] = useState({ logIn: "User Login", logOut: "Customer" });
-	
+	const [okce, setOkce] = useState(false);
+
 	const cancel = ( () => {
 		setData({user:'', password:''});
 	});
@@ -69,11 +70,16 @@ const LoginForm = () => {
 					<label>User Name</label>
 					<input className="input" type="text" name="user" placeholder="User Name" onChange={onInputChange} value={data.user || ''} />
 				</div>
+				
 				<div className={"field"}>
 					<label>
 						Password
 					</label>
-					<input className="input" type="text" name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />
+					<span class="icon is-large">
+						<i className={ okce ? "far fa-eye" : "far fa-eye-slash" } onClick={() => setOkce(!okce)}></i>
+					</span>	
+
+					<input className="input has-icons-right" type={ okce ? "text":"password"} name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />
 				</div>	
 				{ fly.flayable &&
 					<div className="buttons is-right">
