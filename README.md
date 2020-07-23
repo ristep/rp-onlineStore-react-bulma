@@ -1,9 +1,10 @@
 # rp-onlineStore-react-bulma
 
-### Online Store Demo application
+### Online Store Demo SPA client application
 
-Created with react, redux, and bulma   
+Created with react, redux, and bulma.
 
+Source code can be found [here](https://github.com/ristep/rp-onlineStore-react-bulma) on GitHub.
 
 ## ReadMe from create-react-app
 
@@ -73,4 +74,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# rp-food-online
+

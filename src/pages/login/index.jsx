@@ -23,6 +23,7 @@ const LoginForm = () => {
 		if(fly.flayable){
 			dispatch(fetchToken({ userName: data.user, password: data.password }));
 			setFly((fl) => ({ ...fl, flayable: false, loginError: true }));
+			console.log(fly);
 		}
 	});
 
@@ -60,8 +61,8 @@ const LoginForm = () => {
 	if(!isLoggedIn)
 		return (
 		<form style={{maxWidth: '520px'}}>
-			<div className={classNames({fly})} onKeyDown={(evn) => keyHandle(evn)}>
-				<div className="title">
+			<div className={classNames({ fly })} onKeyDown={(evn) => keyHandle(evn)}>
+				<div className={"title is-3 "+ (fly.loginError?' has-text-danger': 'has-text-info')}>
 					{ttls.logIn}
 				</div>
 				<div className={"field"}>
@@ -75,9 +76,9 @@ const LoginForm = () => {
 					<input className="input" type="text" name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />
 				</div>	
 				{ fly.flayable &&
-					<div className="bottomLine">
-						<div className="button is-rounded is-primary" onClick={() => cancel()}>Cancel</div>
-						<div className="button is-rounded" onClick={() => submit()}>Login</div>
+					<div className="buttons is-right">
+						<div className="button is-rounded " onClick={() => cancel()}>Cancel</div>
+						<div className="button is-rounded is-primary" onClick={() => submit()}>Login</div>
 					</div>
 				}
 				 {/* <ReactJson src={fly} />  */}
@@ -89,7 +90,7 @@ const LoginForm = () => {
 			<form className='form'>
 				<div style={{ maxWidth: '520px'}}>
 					<div className={'inputBox'}>
-						<div className="title">
+						<div className={"title is-3 has-text-info"}>
 							<label>You are signed in as:</label>
 						</div>
 
@@ -106,9 +107,9 @@ const LoginForm = () => {
 							</label>
 							<input className="input is-large" disabled type="text" name="user" placeholder="User Name" onChange={onInputChange} value={firstName+' '+secondName} />
 						</div>
-						<div className="bottomLine">
-							<div className="button is-rounded is-link" onClick={() => logout()} >Logout</div>
+						<div className="buttons is-right">
 							<div className="button is-rounded" onClick={() => window.location.href = '#/user'} >User data</div>
+							<div className="button is-rounded is-danger" onClick={() => logout()} >Logout</div>
 						</div>
 					</div>
 				</div> 
