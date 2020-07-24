@@ -37,3 +37,4 @@ export const postJsonRequest = (args) => {
 };
 
 export const imgUrl = axParams.baseURL + 'images/' 
+export const slikcaUrl = axParams.baseURL + 'images/slikca' 

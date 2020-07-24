@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { imgUrl } from "dataModules";
 import { addToCart } from "redux/actions";
-import { useAuToken } from "redux/selectorHooks";
+// import { useAuToken } from "redux/selectorHooks";
 
 const btnInfo = {
 	flexGrow: 1,
@@ -28,8 +28,8 @@ const Box = (props) => {
 	};
 
 	const titlovi = () => (
-		<div onClick={() => window.location.href = '#/product/'+id+'/'+title }>
-			<p className="title is-size-4 is-italic has-text-weight-normal">{title}</p>
+		<div>
+			<a className="title is-size-4 is-italic has-text-weight-normal" href={'#/product/'+id+'/'+title}>{title}</a>
 			{/* <p className="subtitle has-text-white is-size-6">{description}</p> */}
 			<p className="subtitle" />
 		</div>
@@ -47,8 +47,8 @@ const Box = (props) => {
 	return (
 		<div className="box ">
 			<div className="header" >
-				<div className="card-image" style={ topStyle }>
-				<figure className="image is-4by3" >
+				<div className="card-image" style={ topStyle } onClick={() => window.location.href = '#/product/'+id+'/'+title} >
+				<figure className="image is-4by3">
 					<img src={imgUrl+imgFileName} alt="" />
 				</figure>
 				<div className="content is-overlay">

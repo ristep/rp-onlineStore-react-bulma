@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFoodsAll } from "redux/selectors";
 import  Box from "components/FoodBox";
 import Favicon from 'react-favicon';
-import { submitJsonQuery } from "redux/actions";
+import { fetchFoods } from "redux/actions";
 
 function ProductsPage() { 
 	// const userToken = useSelector(getUserToken);
@@ -11,15 +11,8 @@ function ProductsPage() {
 	const foodsAll = useSelector(getFoodsAll); //optained data from server
 	
 	useEffect(() => {
-		dispatch(submitJsonQuery({	
-			dataSet: 'foodsAll',
-			jsonQuery:{
-				sqlStatement: "select",
-				table: "Foods",
-				fields: ["id", "title", "description", "size", "price", "imgFileName"]
-			}
-		}));
-	}, [dispatch]);;
+		dispatch(fetchFoods());
+	}, [dispatch]);
 
   return (
 		<div className="container">

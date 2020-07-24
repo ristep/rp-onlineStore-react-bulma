@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPhotoList, getFoodsAll } from "redux/selectors";
+import { fetchPhotoList } from "redux/actions"
+import ReactJson from "react-json-view";
 
 const HomePage = () => {
+  const [ ndx, setNdx] = useState(3);
+  const dispatch = useDispatch();
+  const { OK, data } = useSelector(getPhotoList);
+  const foodsAll = useSelector(getFoodsAll); //optained data from server
+  
+  useEffect(() => {
+    // dispatch(fetchFoods());
+    dispatch(fetchPhotoList());
+    setNdx(5);
+	}, [dispatch]);
+
   return (
     <>
       <div className="card">
         <div className="card-image">
-          <figure className="image is-4by3">
-            <img
-              src="https://bulma.io/images/placeholders/1280x960.png"
-              alt="Placeholder image"
-            />
+          <figure className="image is-16by9">
+            <img src={data[ndx]} alt='' /> 
           </figure>
         </div>
         <div className="card-content">
@@ -17,7 +29,13 @@ const HomePage = () => {
             <div className="media-left">
               <figure className="image is-48x48">
                 <img
-                  src="https://bulma.io/images/placeholders/96x96.png"
+                  src={data[ndx-1]}
+                  alt="Placeholder image"
+                />
+              </figure>
+              <figure className="image is-48x48">
+                <img
+                  src={data[ndx+1]}
                   alt="Placeholder image"
                 />
               </figure>
@@ -41,6 +59,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      {/* <ReactJson src={photoList} /> */}
     </>
   );
 };

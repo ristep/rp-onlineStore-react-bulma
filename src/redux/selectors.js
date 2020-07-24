@@ -19,7 +19,7 @@ export const getUserData = (state) => (state.jsonData.userData.data[0]);
 export const getUserDataTouched = (state) => (state.jsonData.userData.dataTouched !== undefined); 	
 export const getTouchedArr = (state) => (state.jsonData.userData.dataTouched); 	
 export const getUpdData = (state) => (state.jsonData.userData.updData); 	
-
+export const getPhotoList = (state) => (state.jsonData.photoList); 	
 
 // cartDataSet
 export const getCartDataSet = (state) => (state.cartList);

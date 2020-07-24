@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import HomePage from "pages/home";
-import ProductsPage from "pages/pruducts";
+import ProductsPage from "pages/products";
 import PageNotFound from "pages/notFound";
 import SetingsPage from "pages/setings";
 import ProductPage from "pages/product";

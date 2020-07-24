@@ -10,7 +10,6 @@ const ProductPage = () => {
 	const params = useSelector(getNaviParams);
 	const data = useSelector(getFoodDetail);
 	const variant = params[1];
-	var img = '';
 	
   const reLoad = useCallback(() => {
 		dispatch(prepareDataAction({ dataSet: "foodDetail", dataAction:"fetch", keyData: { id: params[0] }}))

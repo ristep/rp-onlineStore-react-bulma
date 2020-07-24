@@ -127,6 +127,46 @@ export const submitJsonQuery = (args) => {
 	}
 }
 
+export const fetchFoods = () => {
+	var { dataSet, jsonQuery } = 	{	
+		dataSet: 'foodsAll',
+		jsonQuery:{
+			sqlStatement: "select",
+			table: "Foods",
+			fields: ["id", "title", "description", "size", "price", "imgFileName"]
+		}
+	};
+	// returnin function is pattern for Redux_Trunk middlware
+	return function (dispatch, getState) {
+		dispatch(submitRequest());
+		console.log(jsonQuery);
+		postJsonRequest({
+			auToken: getState().userToken.tokenData.auToken,
+			request: jsonQuery,
+			callBack: (udat) => { dispatch(submitRequestSucces({ ...udat, dataSet: dataSet })) }
+		})
+	}
+}
+
+export const fetchPhotoList = () => {
+	var { dataSet, jsonQuery } = 	{	
+		dataSet: 'photoList',
+		jsonQuery:{
+			phpFunction: 'photoList'
+		}
+	};
+	// returnin function is pattern for Redux_Trunk middlware
+	return function (dispatch, getState) {
+		dispatch(submitRequest());
+		console.log(jsonQuery);
+		postJsonRequest({
+			auToken: getState().userToken.tokenData.auToken,
+			request: jsonQuery,
+			callBack: (udat) => { dispatch(submitRequestSucces({ ...udat, dataSet: dataSet })) }
+		})
+	}
+}
+
 // export apiCall = ()
 
 // cart Actions

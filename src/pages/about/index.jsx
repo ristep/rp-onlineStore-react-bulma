@@ -20,7 +20,7 @@ const AboutPage = () =>{
           throw new Error('Error message.');
         })
         .then(function (data) {
-          console.log("data: ", data);
+          //console.log("data: ", data);
           setMarkdown( data );
         }.bind(this))
         .catch(function (err) {

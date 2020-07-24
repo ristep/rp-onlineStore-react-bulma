@@ -71,6 +71,11 @@ export const initialState = () => {
 				keyData: { id: undefined }
 			}
 		},
+		photoList: {
+			OK:false,
+			dataSet:"photoList",
+			data:[],
+		}
 	}
 };
 
