@@ -22,7 +22,7 @@ const AboutPage = () =>{
         .then(function (data) {
           //console.log("data: ", data);
           setMarkdown( data );
-        }.bind(this))
+        })
         .catch(function (err) {
           // console.log("failed to load ", url, err.message);
       });

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPhotoList, getFoodsAll } from "redux/selectors";
+import { getPhotoList } from "redux/selectors";
 import { fetchPhotoList } from "redux/actions"
-import ReactJson from "react-json-view";
 
 const HomePage = () => {
-  const [ ndx, setNdx] = useState(3);
+  const [ ndx, setNdx] = useState(1);
   const dispatch = useDispatch();
-  const { OK, data } = useSelector(getPhotoList);
-  const foodsAll = useSelector(getFoodsAll); //optained data from server
+  const { data } = useSelector(getPhotoList);
+  // const foodsAll = useSelector(getFoodsAll); //optained data from server
   
   useEffect(() => {
-    // dispatch(fetchFoods());
     dispatch(fetchPhotoList());
     setNdx(5);
 	}, [dispatch]);
@@ -26,24 +24,32 @@ const HomePage = () => {
         </div>
         <div className="card-content">
           <div className="media">
+            { data[ndx-1] &&
             <div className="media-left">
-              <figure className="image is-48x48">
+              <figure className="image is-48x48" onClick={() => setNdx(ndx-1) }>
                 <img
+                  className="is-rounded"
                   src={data[ndx-1]}
-                  alt="Placeholder image"
-                />
-              </figure>
-              <figure className="image is-48x48">
-                <img
-                  src={data[ndx+1]}
-                  alt="Placeholder image"
+                  alt=""
                 />
               </figure>
             </div>
+            }  
             <div className="media-content">
               <p className="title is-4">Home page</p>
               <p className="subtitle is-6">Free food online</p>
             </div>
+            { data[ndx+1] &&
+            <div className="media-right">
+              <figure className="image is-48x48" onClick={() => setNdx(ndx+1) }>
+                <img
+                  className="is-rounded"
+                  src={data[ndx+1]}
+                  alt=""
+                />
+              </figure>
+            </div>
+            }
           </div>
 
           <div className="content">

@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Icon from '@mdi/react';
-import { mdiEyeOffOutline, mdiEyeOutline  } from '@mdi/js';
 
 // import ReactJson from 'react-json-view';
 import { useAuToken, useUserTitles } from 'redux/selectorHooks';
@@ -74,7 +72,7 @@ const PasswChange = () => {
 	}, [nomatch,passw.currPassw,passw.newPasswA]);
 
 	return(
-		<form className='page' >
+		<form className='page box' >
 			<div style={{ maxWidth: '520px'}}>
 				<div className="title">
 					Change password

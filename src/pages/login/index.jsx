@@ -61,14 +61,15 @@ const LoginForm = () => {
 
 	if(!isLoggedIn)
 		return (
-		<form style={{maxWidth: '520px'}}>
+		<div className="box page">
+		<form style={{maxWidth: '520px'}} metod="post">
 			<div className={classNames({ fly })} onKeyDown={(evn) => keyHandle(evn)}>
 				<div className={"title is-3 "+ (fly.loginError?' has-text-danger': 'has-text-info')}>
 					{ttls.logIn}
 				</div>
 				<div className={"field"}>
 					<label>User Name</label>
-					<input className="input" type="text" name="user" placeholder="User Name" onChange={onInputChange} value={data.user || ''} />
+					<input className="input" type="email" name="user" placeholder="User Name" onChange={onInputChange} value={data.user || ''} />
 				</div>
 				
 				<div className={"field"}>
@@ -78,8 +79,7 @@ const LoginForm = () => {
 					<span class="icon is-large">
 						<i className={ okce ? "far fa-eye" : "far fa-eye-slash" } onClick={() => setOkce(!okce)}></i>
 					</span>	
-
-					<input className="input has-icons-right" type={ okce ? "text":"password"} name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />
+					<input className="input has-icons-right" type={ okce ? "email":"password"} name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />
 				</div>	
 				{ fly.flayable &&
 					<div className="buttons is-right">
@@ -90,9 +90,11 @@ const LoginForm = () => {
 				 {/* <ReactJson src={fly} />  */}
 			</div>
 		</form>
+		</div>	
 		);
 	else
 		return( 
+			<div className="page box">
 			<form className='form'>
 				<div style={{ maxWidth: '520px'}}>
 					<div className={'inputBox'}>
@@ -120,6 +122,7 @@ const LoginForm = () => {
 					</div>
 				</div> 
 			</form>
+			</div>
 	);
 }
 

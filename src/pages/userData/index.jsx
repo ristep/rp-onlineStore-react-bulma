@@ -4,8 +4,7 @@ import {
   updateDataField,
   cancelUpdates,
   executeDataAction,
-  prepareDataAction,
-  navigateToUrl,
+  prepareDataAction
 } from "redux/actions";
 import {
   getUserData,
@@ -15,7 +14,6 @@ import {
 // import ReactJson from 'react-json-view';
 import { useCallback } from "react";
 import { useUserToken } from "redux/selectorHooks";
-import { mdiLockReset } from "@mdi/js";
 // import NavLink from 'elements/navLink';
 
 const UserData = () => {
@@ -71,7 +69,7 @@ const UserData = () => {
 
   if (data)
     return (
-      <div className="box-cc">
+      <div className="page box">
         <div className="title">
           User Data
           <span class="icon has-text-danger is-large">

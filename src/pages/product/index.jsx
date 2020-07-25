@@ -29,8 +29,7 @@ const ProductPage = () => {
 	}, [dispatch,reLoad]);
 
 	return (
-		<div className='page'>
-			<div className='box'>
+		<div className='page box'>
 				{data &&	<img src={imgUrl+data.imgFileName} alt='' /> }		
 				<div className="foodDetail">
 					<div>
@@ -42,7 +41,6 @@ const ProductPage = () => {
 				<div className='bottomBar'>
 					<button className="backButton" onClick={() => window.history.go(-1)}>Back</button> 
 				</div>
-			</div>	
 		</div>
 	);
 }

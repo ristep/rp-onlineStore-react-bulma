@@ -1,16 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import HomePage from "pages/home";
-import ProductsPage from "pages/products";
+import ReactDynamicImport from "react-dynamic-import";
+
+// import HomePage from "pages/home";
+//import ProductsPage from "pages/products";
 import PageNotFound from "pages/notFound";
 import SetingsPage from "pages/setings";
 import ProductPage from "pages/product";
 import UserData from "pages/userData";
 import { getPage } from "redux/selectors";
 import LoginForm from "pages/login";
-import PasswChange from "pages/passwChange";
-import UsersTable from "pages/usersTable";
-import AboutPage from "pages/about";
+// import PasswChange from "pages/passwChange";
+// import UsersTable from "pages/usersTable";
+// import AboutPage from "pages/about";
+
+const HomePage    = ReactDynamicImport({loader: () => import("pages/home")}) ;
+const ProductsPage= ReactDynamicImport({loader: () => import("pages/products")}) ;
+const UsersTable  = ReactDynamicImport({loader: () => import("pages/usersTable")}) ;
+const PasswChange = ReactDynamicImport({loader: () => import("pages/passwChange") });
+const AboutPage   = ReactDynamicImport({loader: () => import("pages/about")}) ;
 
 export const routes = {
 	home: <HomePage />,

@@ -30,7 +30,8 @@ const Box = (props) => {
 	const titlovi = () => (
 		<div>
 			<a className="title is-size-4 is-italic has-text-weight-normal" href={'#/product/'+id+'/'+title}>{title}</a>
-			{/* <p className="subtitle has-text-white is-size-6">{description}</p> */}
+			<br /> 
+			<p className="subtitle has-text-white is-size-6">{description}</p>
 			<p className="subtitle" />
 		</div>
 	);

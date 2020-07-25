@@ -10,7 +10,7 @@ const AppNavBar = (props) => {
   const loginOK = useIsLoggedIn();
   const { amount } = useSelector(getCartDataSet);
   const [menu, setMenu] = useState("");
-  const { userName, firstName, secondName } = useUserTitles();
+  const { userName } = useUserTitles();
 
   // const onClickHand = (props) => {
   //   window.location.href = "#/" + props.navRoute;
@@ -56,7 +56,7 @@ const AppNavBar = (props) => {
             <a className="navbar-item" href="#/products">
               Products
             </a>
-            <a className="navbar-item" onClick={() => toggleCartBox()}>
+            <a className="navbar-item" onClick={() => toggleCartBox()} href="#/home">
               {"Cart: $" + amount.toFixed(2)}{" "}
             </a>
             <a className="navbar-item" href="#/about">

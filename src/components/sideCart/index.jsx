@@ -4,7 +4,7 @@ import {  getCartDataSet } from 'redux/selectors';
 import { closeCartBox, clearCart, removeFromCart, addCartItemQuantity } from 'redux/actions';
 import { useUserTitles } from 'redux/selectorHooks';
 import { ReactComponent as CartLarge } from '../../images/shopping-cart-solid.svg';
-import { imgUrl } from "dataModules";
+// import { imgUrl } from "dataModules";
 
 const sliko = {
 	fill: 'rgb(106, 191, 176)',
@@ -13,24 +13,14 @@ const sliko = {
 	padding: '0.2em'
 }
 
-const btnInfo = {
-	flexGrow: 1,
-  flexShrink: 1,
-	fontWeight: '800'
-};
-
 const flex = {
 	display: 'flex',
-}
-const butpad = {
-	paddingTop: '0.2rem',
-	bacgroundColor:'red'
 }
 
 const SideCart = () => {
 	const { firstName, secondName } = useUserTitles();
 	const dispatch = useDispatch();
-	const { itemCount, amount, items } = useSelector(getCartDataSet); 
+	const { amount, items } = useSelector(getCartDataSet); 
 
 	const TinkiVinki = (i,item ) => {
 
@@ -43,7 +33,7 @@ const SideCart = () => {
 	}
 		
 	return(
-		<div style={tinkiStyle} >							
+		<div className='icons-group' style={tinkiStyle} >							
   			<i className="fas fa-plus-circle has-text-success" onClick={() => dispatch(addCartItemQuantity({ index:i, quantity: 1 }))}></i>
   			<i className="fas fa-minus-circle has-text-warning" onClick={() => dispatch(addCartItemQuantity({ index:i, quantity:-1 }))} ></i>
   			<i className="fas fa-trash-alt has-text-danger" onClick={(() => dispatch(removeFromCart(i)))}></i>

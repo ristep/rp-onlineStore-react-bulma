@@ -1,17 +1,25 @@
 
-// @import "node_modules/bulmaswatch/darkly/bulmaswatch";
+// @import "node_modules/bulmaswatch/slate/bulmaswatch";
 // @import "node_modules/bulmaswatch/default/bulmaswatch";
-// @import "node_modules/bulmaswatch/lumen/bulmaswatch";
 // @import "node_modules/bulmaswatch/minty/bulmaswatch";
 // @import "node_modules/bulmaswatch/litera/bulmaswatch";
-// @import "node_modules/bulmaswatch/lux/bulmaswatch";
+// @import "node_modules/bulmaswatch/united/bulmaswatch";
 // @import "node_modules/bulmaswatch/materia/bulmaswatch";
+// @import "node_modules/bulmaswatch/pulse/bulmaswatch";
+// @import "node_modules/bulmaswatch/sandstone/bulmaswatch";
+// @import "node_modules/bulmaswatch/simplex/bulmaswatch";
+// @import "node_modules/bulmaswatch/spacelab/bulmaswatch";
+// @import "node_modules/bulmaswatch/yeti/bulmaswatch";
 
 // $footer-padding: 0.3rem 1.5rem .3rem;
 $column-gap: 0.5rem;
 $box-padding: 0.2rem;
 
-@import "node_modules/bulmaswatch/default/bulmaswatch";
+@import "node_modules/bulmaswatch/simplex/bulmaswatch";
+
+.hovered{
+	background-color: darken($color: $box-background-color, $amount: 6%);
+}
 
 body {
 	background: lightblue url("appBacground.jpg") repeat fixed center;
@@ -24,12 +32,32 @@ body {
 	// font-weight: 500;
 }
 
+.card{
+	background-color: lighten($color: $card-background-color , $amount: 0);
+}
+
+.page{
+	padding: 15px;
+	background-color: darken($color: $box-background-color, $amount: 3%);
+}
+
+.icons-group > i{
+	padding-right: 2px;
+}
+
 .topGapo{
 	padding: 8px;
 }
 
 .navbar-dropdown {
 	left: -60%;
+	animation: navAnimOpen .2s ease-in-out;
+}
+
+@keyframes navAnimOpen {
+0% {display: none;opacity: 0;max-height: 0;}
+1% {display: block;opacity: 0;}
+100% {opacity: 1;max-height: 396px;}
 }
 
 .footko {
