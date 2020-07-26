@@ -88,7 +88,6 @@ const AppNavBar = (props) => {
                   >
                     Change Password
                   </a>
-
                   <a className="navbar-item" href="#/report">
                     Say something
                   </a>

@@ -6,6 +6,8 @@ import { useUsersAll, useAuToken } from "redux/selectorHooks";
 // import { getTouchedArr } from "redux/selectors";
 
 import { postJsonRequest } from "dataModules";
+import ReactJson from "react-json-view";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
 const UsersTable = () => {
   const dispatch = useDispatch();
@@ -20,10 +22,9 @@ const UsersTable = () => {
     keyData: {},
   });
   const [localData, setLocalData] = useState();
-  const [clicked, setClicked] = useState({ curr: false, list: [] });
+  const [clicked, setClicked] = useState(undefined);
   // const [refresh, setRefresh] = useState(0);
-
-  const [hovered, setHoverd] = useState({ curr: false, list: [] });
+  const [hovered, setHoverd] = useState({ curr: undefined, list: [] });
   const [touchedArr, setTouchedArr] = useState([]);
 
   const changed = (field) =>
@@ -47,23 +48,26 @@ const UsersTable = () => {
             "place",
             "state",
           ],
+          order: "name"
         },
       })
     );
-  }, [dispatch]);
+    setClicked({ ...clicked, list: [...usersAll.data.map(() => false)] });
+	  //eslint-disable-next-line 
+}, []);
 
   useEffect(() => {
-		setClicked({ ...clicked, list: [...usersAll.data.map(() => false)] });
-		// eslint-disable-next-line 
+    if(clicked!=undefined)
+      if( clicked>=0 )
+        document.title = usersAll.data[clicked].name;  
+      //eslint-disable-next-line 
   }, [clicked]);
 
-  const onClickHandle = (i, ev) => {
-    ev.preventDefault();
-    const clk = [...usersAll.data.map(() => false)]; // clicked;
-    clk[i] = !clicked.list[i];
+  const onClickHandle = (i) => {
+    // ev.preventDefault();
     setLocalData(usersAll.data[i]);
     setTouchedArr([]);
-    setClicked({ curr: clk[i] ? i : false, list: clk });
+    setClicked( i );
   };
 
   const hoverRow = (i) => {
@@ -97,27 +101,27 @@ const UsersTable = () => {
   };
 
   const submit = () => {
-    postJsonRequest({
-      auToken: auToken,
-      request: updQuery,
-      callBack: (udat) => {
-        // setResult(udat);
-        if (udat.OK) {
-          setTouchedArr([]);
-          dispatch(
-            updateDataRow({
-              dataSet: "usersAll",
-              index: clicked.curr,
-              dataRow: localData,
-            })
-          );
-        }
-      },
-    });
+      postJsonRequest({
+        auToken: auToken,
+        request: updQuery,
+        callBack: (udat) => {
+          // setResult(udat);
+          if (udat.OK) {
+            setTouchedArr([]);
+            dispatch(
+              updateDataRow({
+                dataSet: "usersAll",
+                index: clicked,
+                dataRow: localData,
+              })
+            );
+          }
+        },
+      });
   };
 
   const cancel = () => {
-    setLocalData(usersAll.data[clicked.curr]);
+    setLocalData(usersAll.data[clicked]);
     setTouchedArr([]);
   };
 
@@ -126,7 +130,8 @@ const UsersTable = () => {
       <div className="table-container">
         <div className="table">
           <div className="title">Users table </div>
-          <table className="redTable">
+          <p className="subtitle">Just an experiment, doesn't need to be visible!</p>
+          <table className="table">
             <thead className="thead">
               <tr>
                 <th>ID</th>
@@ -137,19 +142,18 @@ const UsersTable = () => {
                 <th>Role</th>
               </tr>
             </thead>
-            <tbody>
-              {[
-                ...usersAll.data.map((row, i) => {
+            <tbody className="tbody">
+              {[usersAll.data.map((row, i) => {
                   return (
                     <tr
                       key={row.id}
                       name={"albo" + i}
                       className={
-                        (clicked.list[i] ? "clicked" : "") +
+                        (clicked===i ? "clicked" : "") +
                         " " +
                         (hovered.list[i] ? "hovered" : "")
                       }
-                      onClick={(ev) => onClickHandle(i, ev)}
+                      onClick={() => onClickHandle(i)}
                       onMouseOver={() => hoverRow(i)}
                       onMouseLeave={() => leaveRow(i)}
                     >
@@ -165,8 +169,8 @@ const UsersTable = () => {
               ]}
             </tbody>
           </table>
-          {/* {clicked.curr===false && <p>Click on user for deatails => { hovered.curr ? usersAll.data[hovered.curr].name : ''}</p>} */}
-          {clicked.curr && localData && (
+          {/* {clicked!=undefined && <p>Click on user for deatails =&gt; { (hovered || hovered===0) ? usersAll.data[hovered].name : ''}</p>} */}
+          {clicked>=0 && localData && (
             <div className="box" style={{ padding: "16px" }}>
               <form className="form usersDetail">
                 <div className="columns">
@@ -185,8 +189,8 @@ const UsersTable = () => {
                       />
                     </div>
                     <div className="field">
-                      <div className={"inputLabel" + changed("first_name")}>
-                        <label className={"label" + changed("name")}>
+                      <div>
+                        <label className={"label" + changed("first_name")}>
                           First name
                         </label>
                         <input
@@ -200,8 +204,8 @@ const UsersTable = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <div className={"inputLabel" + changed("second_name")}>
-                        <label className={"label" + changed("name")}>
+                      <div>
+                        <label className={"label" + changed("second_name")}>
                           Second name
                         </label>
                         <input
@@ -217,8 +221,8 @@ const UsersTable = () => {
                   </div>
                   <div className="column">
                     <div className="field">
-                      <div className={"inputLabel" + changed("email")}>
-                        <label className={"label" + changed("name")}>
+                      <div>
+                        <label className={"label" + changed("email")}>
                           e-mail
                         </label>
                         <input
@@ -232,8 +236,8 @@ const UsersTable = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <div className={"inputLabel" + changed("address")}>
-                        <label className={"label" + changed("name")}>
+                      <div>
+                        <label className={"label" + changed("address")}>
                           Address
                         </label>
                         <input
@@ -247,8 +251,8 @@ const UsersTable = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <div className={"inputLabel" + changed("place")}>
-                        <label className={"label" + changed("name")}>
+                      <div>
+                        <label className={"label" + changed("place")}>
                           Place
                         </label>
                         <input
@@ -281,7 +285,7 @@ const UsersTable = () => {
           )}
           {/* <ReactJson src={localData} />  */}
         </div>
-        {/* <ReactJson src={updQuery} /> */}
+        {/* <ReactJson src={clicked} /> */}
       </div>
     </div>
   );
