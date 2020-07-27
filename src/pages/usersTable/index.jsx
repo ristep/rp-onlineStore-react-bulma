@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { submitJsonQuery, updateDataRow } from "redux/actions";
 import { useDispatch } from "react-redux";
 // import ReactJson from "react-json-view";
@@ -7,24 +7,28 @@ import { useUsersAll, useAuToken } from "redux/selectorHooks";
 
 import { postJsonRequest } from "dataModules";
 import ReactJson from "react-json-view";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
+// import ReactJson from "react-json-view";
+// import { unstable_renderSubtreeIntoContainer } from "react-dom";
+
+const emptyQuery = {
+  sqlStatement: "update",
+  table: "users",
+  data: {},
+  keyData: {},
+};
 
 const UsersTable = () => {
   const dispatch = useDispatch();
   const auToken = useAuToken();
   const usersAll = useUsersAll(); //optained data from server
-
+  
+  const inputEl = useRef(null);
   // const [result, setResult] = useState({});
-  const [updQuery, setUpdQuery] = useState({
-    sqlStatement: "update",
-    table: "users",
-    data: {},
-    keyData: {},
-  });
+  const [updQuery, setUpdQuery] = useState(emptyQuery);
   const [localData, setLocalData] = useState();
   const [clicked, setClicked] = useState(undefined);
   // const [refresh, setRefresh] = useState(0);
-  const [hovered, setHoverd] = useState({ curr: undefined, list: [] });
+  const [hovered, setHoverd] = useState(undefined);
   const [touchedArr, setTouchedArr] = useState([]);
 
   const changed = (field) =>
@@ -56,10 +60,14 @@ const UsersTable = () => {
 	  //eslint-disable-next-line 
 }, []);
 
-  useEffect(() => {
-    if(clicked!=undefined)
-      if( clicked>=0 )
+  useMemo(() => {
+    if(clicked !== undefined)
+      if( clicked >= 0 ){
         document.title = usersAll.data[clicked].name;  
+        if(inputEl.current)
+          inputEl.current.focus();
+        // console.log(inputEl.current);
+      }       
       //eslint-disable-next-line 
   }, [clicked]);
 
@@ -67,17 +75,8 @@ const UsersTable = () => {
     // ev.preventDefault();
     setLocalData(usersAll.data[i]);
     setTouchedArr([]);
+    setUpdQuery(emptyQuery);
     setClicked( i );
-  };
-
-  const hoverRow = (i) => {
-    const clk = [...usersAll.data.map(() => false)]; // hovered;
-    clk[i] = true;
-    setHoverd({ curr: clk[i] ? i : false, list: clk });
-  };
-
-  const leaveRow = (i) => {
-    setHoverd({ curr: false, list: [] });
   };
 
   const onInputChange = (ev) => {
@@ -85,7 +84,7 @@ const UsersTable = () => {
       ...localData,
       [ev.currentTarget.name]: ev.currentTarget.value,
     });
-    setTouchedArr([...touchedArr, ev.currentTarget.name]);
+    setTouchedArr([ev.currentTarget.name, ...touchedArr.filter(f => f !== ev.currentTarget.name)]);
     setUpdQuery({
       ...updQuery,
       data: {
@@ -118,11 +117,13 @@ const UsersTable = () => {
           }
         },
       });
+      setUpdQuery(emptyQuery);
   };
 
   const cancel = () => {
     setLocalData(usersAll.data[clicked]);
     setTouchedArr([]);
+    setUpdQuery(emptyQuery);
   };
 
   return (
@@ -151,11 +152,11 @@ const UsersTable = () => {
                       className={
                         (clicked===i ? "clicked" : "") +
                         " " +
-                        (hovered.list[i] ? "hovered" : "")
+                        (hovered===i ? "hovered" : "")
                       }
                       onClick={() => onClickHandle(i)}
-                      onMouseOver={() => hoverRow(i)}
-                      onMouseLeave={() => leaveRow(i)}
+                      onMouseOver={() => setHoverd(i)}
+                      onMouseLeave={() => setHoverd(undefined)}
                     >
                       <td>{row.id}</td>
                       <td>{row.name}</td>
@@ -169,7 +170,7 @@ const UsersTable = () => {
               ]}
             </tbody>
           </table>
-          {/* {clicked!=undefined && <p>Click on user for deatails =&gt; { (hovered || hovered===0) ? usersAll.data[hovered].name : ''}</p>} */}
+          {clicked!==undefined && <p>Click on user for deatails =&gt; { (hovered || hovered===0) ? usersAll.data[hovered].name : ''}</p>}
           {clicked>=0 && localData && (
             <div className="box" style={{ padding: "16px" }}>
               <form className="form usersDetail">
@@ -194,6 +195,7 @@ const UsersTable = () => {
                           First name
                         </label>
                         <input
+                          ref={inputEl}
                           className="input"
                           type="text"
                           name="first_name"
@@ -285,7 +287,8 @@ const UsersTable = () => {
           )}
           {/* <ReactJson src={localData} />  */}
         </div>
-        {/* <ReactJson src={clicked} /> */}
+        <ReactJson name="touchedArr" src={touchedArr} />
+        <ReactJson name="updQuery" src={updQuery} />
       </div>
     </div>
   );

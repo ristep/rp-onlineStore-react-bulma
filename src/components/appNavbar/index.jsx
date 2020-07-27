@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getCartDataSet } from "redux/selectors";
 import { useIsLoggedIn, useUserTitles } from "redux/selectorHooks";
 import Logo from "elements/logo";
 import { toggleCartBox } from "redux/actions";
 
 const AppNavBar = (props) => {
+  const dispach = useDispatch();
   const { children } = props;
   const loginOK = useIsLoggedIn();
   const { amount } = useSelector(getCartDataSet);
@@ -56,7 +57,8 @@ const AppNavBar = (props) => {
             <a className="navbar-item" href="#/products">
               Products
             </a>
-            <a className="navbar-item" onClick={() => toggleCartBox()} href="#/home">
+            {/* eslint-disable-next-line */}
+            <a className="navbar-item" onClick={() => dispach(toggleCartBox())} >
               {"Cart: $" + amount.toFixed(2)}{" "}
             </a>
             <a className="navbar-item" href="#/about">

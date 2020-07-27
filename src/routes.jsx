@@ -11,12 +11,12 @@ import UserData from "pages/userData";
 import { getPage } from "redux/selectors";
 import LoginForm from "pages/login";
 // import PasswChange from "pages/passwChange";
-// import UsersTable from "pages/usersTable";
+import UsersTable from "pages/usersTable";
 // import AboutPage from "pages/about";
 
 const HomePage    = ReactDynamicImport({loader: () => import("pages/home")}) ;
 const ProductsPage= ReactDynamicImport({loader: () => import("pages/products")}) ;
-const UsersTable  = ReactDynamicImport({loader: () => import("pages/usersTable")}) ;
+// const UsersTable  = ReactDynamicImport({loader: () => import("pages/usersTable")}) ;
 const PasswChange = ReactDynamicImport({loader: () => import("pages/passwChange") });
 const AboutPage   = ReactDynamicImport({loader: () => import("pages/about")}) ;
 

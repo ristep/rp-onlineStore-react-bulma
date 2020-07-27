@@ -16,7 +16,7 @@ const initialState = {
 	settingsDialogState: false,
 	clearWorldAlertState: false,
 	aboutDialogState: false,
-	cartBoxIsOpen: false,
+	cartBoxIsOpen: true,
 	sidenavState: false,
 }
 

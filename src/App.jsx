@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./App.scss";
 import AppNavBar from "components/appNavbar";
 
@@ -7,11 +7,16 @@ import { navigateToUrl, fetchToken } from "redux/actions";
 import { useIsLoggedIn } from "redux/selectorHooks";
 import { NaviGator } from "routes";
 import SideCart from "components/sideCart";
+import { useCardBoxOpen } from 'redux/selectorHooks';
+
+// import { getCartBoxState } from "redux/selectors";
 // import { UserText } from "components/userText";
 
 function App() {
   const dispatch = useDispatch();
   const lioggedIn = useIsLoggedIn();
+  const cartBox =  useCardBoxOpen();
+  const [ dinaClass, setDinaClass] = useState("column is-8")
 
   useEffect(() => {
     dispatch(navigateToUrl(window.location.hash));
@@ -21,21 +26,28 @@ function App() {
       dispatch(fetchToken({ userName: "anonymous", password: "anonymous" }));
   });
 
+  useMemo(() => {
+    if(cartBox)
+      setDinaClass("column is-8");
+    else
+      setDinaClass("column is-12");
+  }, [cartBox]);  
+
   return (
     <div className="container">
       <AppNavBar>
         <div className="topGapo"></div>
         <div className="columns">
-          <div className="column is-8">
+          <div className={dinaClass}>
             <NaviGator />
           </div>
-          <div className="column rows">
-            <div className="bd-notification">
-              <SideCart />
+          {cartBox &&
+            <div className="column">
+              <div className="bd-notification">
+                <SideCart />
+              </div>
             </div>
-            <hr />
-            
-          </div>
+          }
         </div>
       </AppNavBar>
     </div>
