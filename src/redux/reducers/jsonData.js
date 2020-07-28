@@ -6,7 +6,8 @@ import {
 	SUBMIT_REQUEST_SUCCESS,
 	SUBMIT_REQUEST,
 	PREPARE_DATA_ACTION,
-	UPDATE_DATA_ROW
+	UPDATE_DATA_ROW,
+	CLEAR_USER_DATA
 } from 'redux/actionTypes';
 
 export const initialState = () => {
@@ -62,7 +63,18 @@ export const initialState = () => {
 			error: false,
 			message: 'empty',
 			count: 0,
-			data: [],
+			data: [ {
+        id: -1,
+        name: '?',
+        role: '?',
+        first_name: '?',
+        second_name: '',
+        email: '',
+        address: '??',
+        place: '??',
+        state: '',
+        password: ''
+      }],
 			oriData: [],
 			jsonQuery: {
 				sqlStatement: "select",
@@ -129,6 +141,10 @@ export default (state = initialState(), action) =>
 
 			case SUBMIT_REQUEST_ERROR:
 				draft.isFetching = false;
+				break;
+
+			case CLEAR_USER_DATA:
+				draft.userData = initialState.userData;	
 				break;
 
 			default:

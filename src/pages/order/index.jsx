@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getCartDataSet } from 'redux/selectors';
-import { closeCartBox, clearCart, removeFromCart, addCartItemQuantity, navigateToUrl } from 'redux/actions';
-import { useUserTitles, useUserData } from 'redux/selectorHooks';
+import { getCartDataSet, getUserDataTouched, getUserData } from 'redux/selectors';
+import { closeCartBox, clearCart, removeFromCart, addCartItemQuantity, navigateToUrl, prepareDataAction, executeDataAction } from 'redux/actions';
 import { ReactComponent as CartLarge } from '../../images/shopping-cart-solid.svg';
 import ReactJson from 'react-json-view';
+import { useUserToken } from 'redux/selectorHooks';
 // import { imgUrl } from "dataModules";
 
 const sliko = {
@@ -19,10 +19,26 @@ const flex = {
 }
 
 const Order = () => {
-  // const { firstName, secondName } = useUserTitles();
-  const userData = useUserData();
+	// const { firstName, secondName } = useUserTitles();
+	const userData = useSelector(getUserData);
 	const dispatch = useDispatch();
+	const tokenData = useUserToken().tokenData;
+  
 	const { amount, items } = useSelector(getCartDataSet); 
+
+  useEffect(() => {
+    dispatch(
+      prepareDataAction({
+        dataSet: "userData",
+        dataAction: "fetch",
+        keyData: { id: tokenData.id },
+      })
+    );
+    dispatch(executeDataAction("userData"));
+   return () => {
+      console.log("CleanUp");
+    };
+  }, [dispatch, tokenData]);
 
   const onPlaceOrderClick = () => {
     alert("Order has been procesed");

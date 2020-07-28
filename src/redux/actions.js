@@ -26,6 +26,7 @@ import {
 	PREPARE_DATA_ACTION,
 	TOGGLE_SIDENAV,
 	UPDATE_DATA_ROW,
+	CLEAR_USER_DATA,
 } from "./actionTypes";
 import { getToken, postJsonRequest } from "dataModules";
 
@@ -82,6 +83,7 @@ export const cancelUpdates = (dataSet) => ({ type: CANCEL_UPDATES, payload: data
 export const updateData = (jsn) => ({ type: UPDATE_DATA_FIELD, payload: jsn })
 export const reloadData = (dataSet) => ({ type: RELOAD_DATA, payload: dataSet })
 export const prepareDataAction = (prm) => ({type: PREPARE_DATA_ACTION, payload: prm})
+export const clearUserData = () => ({ type: CLEAR_USER_DATA})
 
 export const executeDataAction = (dataSet) => {
 	// returnin function is pattern for Redux_Trunk middlware

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
-import { fetchToken } from 'redux/actions';
+import { fetchToken, clearUserData } from 'redux/actions';
 // import ReactJson from 'react-json-view';
 // import { useCallback } from 'react';
 import {useUserTitles, useIsLoggedIn} from 'redux/selectorHooks';
@@ -29,6 +29,7 @@ const LoginForm = () => {
 	});
 
 	const logout = ( () => { 
+		dispatch(clearUserData);
 		dispatch(fetchToken({ userName: 'anonymous', password: 'anonymous' }));
 		cancel();
 	});
@@ -76,7 +77,7 @@ const LoginForm = () => {
 					<label>
 						Password
 					</label>
-					<span class="icon is-large">
+					<span className="icon is-large">
 						<i className={ okce ? "far fa-eye" : "far fa-eye-slash" } onClick={() => setOkce(!okce)}></i>
 					</span>	
 					<input className="input has-icons-right" type={ okce ? "email":"password"} name="password" placeholder="Password" onChange={onInputChange} value={data.password || ''} />

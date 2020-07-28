@@ -35,6 +35,10 @@ export const SUBMIT_UPDATES = "SUBMIT_UPDATES";
 export const RELOAD_DATA = "RELOAD_DATA";
 export const PREPARE_DATA_ACTION = "PREPARE_DATA_ACTION";
 
+//user data
+export const CLEAR_USER_DATA = "CLEAR_USER_DATA";
+
+
 // experimental data APi
 export const API_CALL = 'API_CALL';
 export const API_CALL_SUCCESS = 'API_CALL_SUCCESS';

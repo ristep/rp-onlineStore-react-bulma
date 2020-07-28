@@ -6,7 +6,6 @@ export const useAuToken = () => useSelector( (state) => (state.userToken.tokenDa
 export const useUsersAll = () => useSelector( (state) => (state.jsonData.usersAll));
 export const useCardBoxOpen = () => useSelector( (state) => (state.uiState.cartBoxIsOpen));
 
-export const useUserData = () => useSelector( (state) => (state.jsonData.userData.data[0]));
 export const useUserTitles = () => {
 	return useSelector((state) => (
 		state.userToken.tokenData !== undefined
