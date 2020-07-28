@@ -2,8 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getCartDataSet } from 'redux/selectors';
 import { closeCartBox, clearCart, removeFromCart, addCartItemQuantity, navigateToUrl } from 'redux/actions';
-import { useUserTitles } from 'redux/selectorHooks';
+import { useUserTitles, useUserData } from 'redux/selectorHooks';
 import { ReactComponent as CartLarge } from '../../images/shopping-cart-solid.svg';
+import ReactJson from 'react-json-view';
 // import { imgUrl } from "dataModules";
 
 const sliko = {
@@ -17,16 +18,16 @@ const flex = {
 	display: 'flex',
 }
 
-const SideCart = () => {
-	const { firstName, secondName } = useUserTitles();
+const Order = () => {
+  // const { firstName, secondName } = useUserTitles();
+  const userData = useUserData();
 	const dispatch = useDispatch();
 	const { amount, items } = useSelector(getCartDataSet); 
 
-	const onOrderClicko = () => {
-		dispatch(closeCartBox());
-		dispatch(navigateToUrl("#/order"));
-	};
-	
+  const onPlaceOrderClick = () => {
+    alert("Order has been procesed");
+  };
+
 	const TinkiVinki = (i,item ) => {
 	const tinkiStyle = { 
 			with: `12px`, 
@@ -44,16 +45,31 @@ const SideCart = () => {
 		</div>
 	)};
 
-	return (
+  return (
+    <>
+    <div className="box">
+      <label className="title is-4">
+        Shipping Information 
+      </label>
+      {/* <ReactJson src={userData} /> */}
+      <p>{userData.first_name}  {userData.second_name}</p>
+      <p>{userData.address}</p>
+      <p>{userData.place}</p>
+    </div>
+    <div className="box">
+      <label className="title is-4">
+        Payment Method
+      </label>
+      <p>Payment will be made after delivery!</p>  
+    </div>
 		<div className='box'>
 
 			<div className="columns mb-0 mt-1">
 				<div align="left" className="column">
-						<CartLarge style={sliko} />
+          <label className="title">
+            Order Review
+          </label>  
 				</div>	
-				<span align='left' className="column is-size-5">
-					<p>{firstName} {secondName}</p>
-				</span>
 			</div>
 
 			<table className="table is-fullwidth mt-0 mb-0 ">
@@ -85,17 +101,13 @@ const SideCart = () => {
 					<p className='title column mb-0' align='right'>${amount.toFixed(2)}</p>
 			</div>
 			<div className='buttons is-centered'  style={flex}>
-				<button className='button is-rounded is-danger' onClick={() => dispatch(clearCart())} >Empty Cart</button>
-				<button className='button is-rounded is-link' onClick={() => onOrderClicko()}>Make order</button>
+				{/* <button className='button is-rounded' onClick={} >Cancel</button> */}
+				<button className='button is-rounded is-default' onClick={() => onPlaceOrderClick()}>Place an order</button>
 			</div>
 			{/* <ReactJson src={items} /> */}
 		</div>
+    </>
 	);
 }
 
-export default SideCart;
-
-
-//code dumpm
-//<button className="button is-small is-rounded is-warning" onClick={(() => dispatch(removeFromCart(i)))}>Remove</button>
-//<button className="button is-small is-rounded" onClick={() => dispatch(addCartItemQuantity({ index:i, quantity:-1 }))}><i className="fas fa-minus"/></button>
+export default Order;
