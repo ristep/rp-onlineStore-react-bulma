@@ -1,18 +1,16 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getCartDataSet, getUserDataTouched, getUserData } from 'redux/selectors';
-import { closeCartBox, clearCart, removeFromCart, addCartItemQuantity, navigateToUrl, prepareDataAction, executeDataAction } from 'redux/actions';
-import { ReactComponent as CartLarge } from '../../images/shopping-cart-solid.svg';
-import ReactJson from 'react-json-view';
+import { getCartDataSet, getUserData } from 'redux/selectors';
+import { removeFromCart, addCartItemQuantity, prepareDataAction, executeDataAction } from 'redux/actions';
 import { useUserToken } from 'redux/selectorHooks';
 // import { imgUrl } from "dataModules";
 
-const sliko = {
-	fill: 'rgb(106, 191, 176)',
-	whith: '24px',
-	height: '24px',
-	padding: '0.2em'
-}
+// const sliko = {
+// 	fill: 'rgb(106, 191, 176)',
+// 	whith: '24px',
+// 	height: '24px',
+// 	padding: '0.2em'
+// }
 
 const flex = {
 	display: 'flex',
