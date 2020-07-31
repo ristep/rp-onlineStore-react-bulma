@@ -5,9 +5,9 @@ $title-family: true;
 $subtitle-family: true;
 
 // @import "node_modules/bulmaswatch/slate/bulmaswatch";
-@import "node_modules/bulmaswatch/default/bulmaswatch";
+// @import "node_modules/bulmaswatch/default/bulmaswatch";
 // @import "node_modules/bulmaswatch/minty/bulmaswatch";
-// @import "node_modules/bulmaswatch/litera/bulmaswatch";
+@import "node_modules/bulmaswatch/litera/bulmaswatch";
 // @import "node_modules/bulmaswatch/united/bulmaswatch";
 // @import "node_modules/bulmaswatch/materia/bulmaswatch";
 // @import "node_modules/bulmaswatch/pulse/bulmaswatch";
@@ -49,8 +49,8 @@ body {
 }
 
 .page{
-	padding: 15px;
-	background-color: darken($color: $box-background-color, $amount: 3%);
+	padding: 5px;
+	background-color: darken($color: $box-background-color, $amount: 6%);
 }
 
 .icons-group > i{
@@ -59,6 +59,22 @@ body {
 
 .topGapo{
 	padding: 8px;
+}
+
+@media (max-width: 767px) {
+	.page {
+		margin-top: 48px;
+	}
+
+	.navbar {
+			position: absolute;
+			top: 0;
+			left: 0;
+	//    height: 100%;
+			width: 100%;
+			// background-color: rgba(0,0,0,0.5);
+			z-index: 10;
+	}
 }
 
 .navbar-dropdown {

@@ -141,7 +141,7 @@ export const fetchFoods = () => {
 	// returnin function is pattern for Redux_Trunk middlware
 	return function (dispatch, getState) {
 		dispatch(submitRequest());
-		console.log(jsonQuery);
+		// console.log(jsonQuery);
 		postJsonRequest({
 			auToken: getState().userToken.tokenData.auToken,
 			request: jsonQuery,

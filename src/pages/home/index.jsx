@@ -16,7 +16,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="card">
+      <div className="page">
         <div className="card-image">
           <figure className="image is-16by9">
             <img src={data[ndx]} alt='' /> 
@@ -53,10 +53,9 @@ const HomePage = () => {
           </div>
 
           <div className="content">
-            This is only test application, you can't order anything on this site :) 
-
+            This is a test and demo application, you can't order anything on this site :)
 						<hr />
-            <div className='buttons is-centered'>
+            <div className="buttons is-centered">
               <a className="button is-rounded is-primary" href="#/usersTable">Users Table</a>
               <a className="button is-rounded is-primary" href="#/login">Login</a>
               <a className="button is-rounded is-primary" href="#/products">Products for ordering</a>

@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import validator from "email-validator";
 import {
   updateDataField,
   cancelUpdates,
   executeDataAction,
-  prepareDataAction
+  prepareDataAction,
 } from "redux/actions";
 import {
   getUserData,
@@ -17,6 +18,8 @@ import { useUserToken } from "redux/selectorHooks";
 // import NavLink from 'elements/navLink';
 
 const UserData = () => {
+  const [emailOK, setEmailOK] = useState(true);
+  const [userOK, setUserOK] = useState(true);
   const dispatch = useDispatch();
   const data = useSelector(getUserData);
   const touched = useSelector(getUserDataTouched);
@@ -52,6 +55,14 @@ const UserData = () => {
     dispatch(executeDataAction("userData"));
   };
 
+  useEffect(() => {
+    setEmailOK(validator.validate(data.email));
+  }, [data.email]);
+
+  useEffect(() => {
+    setUserOK(data.name.length > 3);
+  }, [data.name]);
+
   const onInputChange = (ev) => {
     dispatch(
       updateDataField({
@@ -83,22 +94,41 @@ const UserData = () => {
         <form>
           <div className="columns">
             <div className="column">
-              <div className="field">
-                <label className={"label" + changed("name")}>User Name</label>
-                <div className="control">
+              <div className={"field" + changed("name")}>
+                <label className="label">Username</label>
+                <div className="control has-icons-left has-icons-right">
                   <input
-                    className="input"
-                    type="text"
+                    className={"input " + (userOK ? "is-success" : "is-danger")}
                     name="name"
-                    placeholder="userName"
+                    type="text"
+                    placeholder="username"
                     onChange={onInputChange}
-                    value={data.name || ""}
+                    value={data.name}
                   />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-user"></i>
+                  </span>
+                  {!userOK ? (
+                    <>
+                      <span className="icon is-small is-right">
+                        <i className="fas fa-times"></i>
+                      </span>
+                      <p className="help is-danger">
+                        This username is not valid
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <span className="icon is-small is-right">
+                        <i className="fas fa-check"></i>
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
 
               <div className={"field" + changed("first_name")}>
-                <label className="label">First name</label>
+                <label className="label">Firstname</label>
                 <input
                   className="input"
                   type="text"
@@ -110,7 +140,7 @@ const UserData = () => {
               </div>
 
               <div className={"field" + changed("second_name")}>
-                <label className="label">Second name</label>
+                <label className="label">Secondname</label>
                 <input
                   className="input"
                   type="text"
@@ -123,15 +153,30 @@ const UserData = () => {
             </div>
             <div className="column">
               <div className={"field" + changed("email")}>
-                <label className="label">e-mail</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="email"
-                  placeholder="e-Mail"
-                  onChange={onInputChange}
-                  value={data.email || ""}
-                />
+                <label className="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    className={
+                      "input " + (emailOK ? "is-success" : "is-danger")
+                    }
+                    type="text"
+                    name="email"
+                    placeholder="Email input"
+                    onChange={onInputChange}
+                    value={data.email || ""}
+                  />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-envelope"></i>
+                  </span>
+                  {!emailOK && (
+                    <>
+                      <span className="icon is-small is-right">
+                        <i className="fas fa-exclamation-triangle"></i>
+                      </span>
+                      <p className="help is-danger">This email is invalid</p>
+                    </>
+                  )}
+                </div>
               </div>
 
               <div className={"field" + changed("address")}>
@@ -157,21 +202,24 @@ const UserData = () => {
                   value={data.place || ""}
                 />
               </div>
-						</div>
-					</div>
-					<div>
-						{touched && (
-							<div className="buttons is-right">
-								<div className="button is-rounded" onClick={() => cancel()}>
-									Cancel
-								</div>
-								<div className="button is-rounded is-link" onClick={() => submit()}>
-									Submit
-								</div>
-							</div>
-						)}
-						{/* <ReactJson src={data} /> */}
-						</div>	
+            </div>
+          </div>
+          <div>
+            {touched && (
+              <div className="buttons is-right">
+                <div className="button is-rounded" onClick={() => cancel()}>
+                  Cancel
+                </div>
+                <div
+                  className="button is-rounded is-link"
+                  onClick={() => submit()}
+                >
+                  Submit
+                </div>
+              </div>
+            )}
+            {/* <ReactJson src={data} /> */}
+          </div>
         </form>
       </div>
     );
