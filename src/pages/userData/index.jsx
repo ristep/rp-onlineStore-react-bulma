@@ -15,16 +15,19 @@ import {
 // import ReactJson from 'react-json-view';
 import { useCallback } from "react";
 import { useUserToken } from "redux/selectorHooks";
+import { postJsonRequest } from "dataModules";
+import ReactJson from "react-json-view";
 // import NavLink from 'elements/navLink';
 
 const UserData = () => {
   const [emailOK, setEmailOK] = useState(true);
-  const [userOK, setUserOK] = useState(true);
+  const [userNameState, setUserNameState] = useState({isValid: true, errMsg: ''})
   const dispatch = useDispatch();
   const data = useSelector(getUserData);
   const touched = useSelector(getUserDataTouched);
   const touchedArr = useSelector(getTouchedArr);
   const tokenData = useUserToken().tokenData;
+
   const changed = (field) =>
     (touchedArr ? touchedArr.includes(field) : false) ? " touched" : "";
 
@@ -60,7 +63,20 @@ const UserData = () => {
   }, [data.email]);
 
   useEffect(() => {
-    setUserOK(data.name.length > 3);
+    if (data.name.length > 3) {
+      const request = {
+        phpFunction: "validNewUserName",
+        userId: data.id,
+        newUserName: data.name,
+        oldUserName: data.name,
+      };
+      const callBack = (rdt) => {
+        setUserNameState({isValid: rdt.data, errMsg: rdt.message});
+      };
+      postJsonRequest({ request, auToken: tokenData.auToken, callBack });
+    } else {
+      setUserNameState({isValid: false, errMsg: 'This username is то short, must have at least four letters!'});
+    }
   }, [data.name]);
 
   const onInputChange = (ev) => {
@@ -83,7 +99,7 @@ const UserData = () => {
       <div className="page box">
         <div className="title">
           User Data
-          <span class="icon has-text-danger is-large">
+          <span className="icon has-text-danger is-large">
             <i
               className="fas fa-unlock-alt"
               align="right"
@@ -95,10 +111,10 @@ const UserData = () => {
           <div className="columns">
             <div className="column">
               <div className={"field" + changed("name")}>
-                <label className="label">Username</label>
+                <label className="label">Username {userNameState.isValid}</label>
                 <div className="control has-icons-left has-icons-right">
                   <input
-                    className={"input " + (userOK ? "is-success" : "is-danger")}
+                    className={"input " + (userNameState.isValid ? "is-success" : "is-danger")}
                     name="name"
                     type="text"
                     placeholder="username"
@@ -108,13 +124,13 @@ const UserData = () => {
                   <span className="icon is-small is-left">
                     <i className="fas fa-user"></i>
                   </span>
-                  {!userOK ? (
+                  {!userNameState.isValid ? (
                     <>
                       <span className="icon is-small is-right">
                         <i className="fas fa-times"></i>
                       </span>
                       <p className="help is-danger">
-                        This username is not valid
+                        {userNameState.errMsg}
                       </p>
                     </>
                   ) : (
@@ -154,7 +170,7 @@ const UserData = () => {
             <div className="column">
               <div className={"field" + changed("email")}>
                 <label className="label">Email</label>
-                <div class="control has-icons-left has-icons-right">
+                <div className="control has-icons-left has-icons-right">
                   <input
                     className={
                       "input " + (emailOK ? "is-success" : "is-danger")
@@ -205,7 +221,7 @@ const UserData = () => {
             </div>
           </div>
           <div>
-            {touched && (
+            {touched && userNameState.isValid && (
               <div className="buttons is-right">
                 <div className="button is-rounded" onClick={() => cancel()}>
                   Cancel
@@ -218,7 +234,7 @@ const UserData = () => {
                 </div>
               </div>
             )}
-            {/* <ReactJson src={data} /> */}
+             {/* <ReactJson src={userNameState} />  */}
           </div>
         </form>
       </div>
