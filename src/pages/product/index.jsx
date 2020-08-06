@@ -2,15 +2,17 @@ import React, { useEffect, useCallback } from "react";
 import ReactJson from "react-json-view";
 import { useDispatch, useSelector } from "react-redux";
 import { prepareDataAction, executeDataAction } from "redux/actions";
-import { getFoodDetail, getNaviParams } from "redux/selectors";
+import { getFoodDetail, getNaviParams, getIsFetching, getLoadingClass } from "redux/selectors";
 import { imgUrl } from "dataModules";
 
 const ProductPage = () => {
   const dispatch = useDispatch();
   const params = useSelector(getNaviParams);
   const data = useSelector(getFoodDetail);
-  const variant = params[1];
-
+//  const variant = params[1];
+  const dataFetching = useSelector(getIsFetching);
+  const loadingClass =  useSelector(getLoadingClass);
+  
   const reLoad = useCallback(() => {
     dispatch(
       prepareDataAction({
@@ -22,22 +24,14 @@ const ProductPage = () => {
     dispatch(executeDataAction("foodDetail"));
   }, [dispatch, params]);
 
-  // const cancel = () => {
-  // 	dispatch(cancelUpdates("foodDetail"));
-  // }
-  // const submit = () => {
-  // 	dispatch(prepareDataAction({ dataSet: "foodDetail", dataAction:"submit"}))
-  // 	dispatch(executeDataAction("foodDetail"));
-  // }
-
   useEffect(() => {
     reLoad();
   }, [dispatch, reLoad]);
 
-  if (data !== undefined)
+  if ( data !== undefined )
     return (
-      <div className="page">
-        <div className="card">
+      <div className={"page "+loadingClass}>
+        <div className={"card "+loadingClass}>
           <header class="card-header">
             <h1 class="card-header-title">{data.title}</h1>
           </header>
@@ -62,7 +56,13 @@ const ProductPage = () => {
         </div>
       </div>
     );
-  else return <div>Loading</div>;
+  else return(
+    <div className="page">
+      <div className="card">
+          Loading {dataFetching}
+      </div>
+    </div>
+  );
 };
 
 export default ProductPage;

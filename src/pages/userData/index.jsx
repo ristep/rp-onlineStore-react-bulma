@@ -11,13 +11,11 @@ import {
   getUserData,
   getUserDataTouched,
   getTouchedArr,
+  getLoadingClass,
 } from "redux/selectors";
-// import ReactJson from 'react-json-view';
 import { useCallback } from "react";
 import { useUserToken } from "redux/selectorHooks";
 import { postJsonRequest } from "dataModules";
-import ReactJson from "react-json-view";
-// import NavLink from 'elements/navLink';
 
 const UserData = () => {
   const [emailOK, setEmailOK] = useState(true);
@@ -27,7 +25,8 @@ const UserData = () => {
   const touched = useSelector(getUserDataTouched);
   const touchedArr = useSelector(getTouchedArr);
   const tokenData = useUserToken().tokenData;
-
+  const reWhiteSpace = new RegExp("\\s+");
+  const loadingClass =  useSelector(getLoadingClass);
   const changed = (field) =>
     (touchedArr ? touchedArr.includes(field) : false) ? " touched" : "";
 
@@ -63,20 +62,24 @@ const UserData = () => {
   }, [data.email]);
 
   useEffect(() => {
-    if (data.name.length > 3) {
-      const request = {
-        phpFunction: "validNewUserName",
-        userId: data.id,
-        newUserName: data.name,
-        oldUserName: data.name,
-      };
-      const callBack = (rdt) => {
-        setUserNameState({isValid: rdt.data, errMsg: rdt.message});
-      };
-      postJsonRequest({ request, auToken: tokenData.auToken, callBack });
-    } else {
-      setUserNameState({isValid: false, errMsg: 'This username is то short, must have at least four letters!'});
+    if(reWhiteSpace.test(data.name)){
+      setUserNameState({isValid: false, errMsg: 'The username can`t contain white spaces!'});
     }
+    else
+      if (data.name.length > 3) {
+        const request = {
+          phpFunction: "validNewUserName",
+          userId: data.id,
+          newUserName: data.name,
+          oldUserName: data.name,
+        };
+        const callBack = (rdt) => {
+          setUserNameState({isValid: rdt.data, errMsg: rdt.message});
+        };
+        postJsonRequest({ request, auToken: tokenData.auToken, callBack });
+      } else {
+        setUserNameState({isValid: false, errMsg: 'The username is то short, must have at least four letters!'});
+      }
   }, [data.name]);
 
   const onInputChange = (ev) => {
@@ -94,9 +97,9 @@ const UserData = () => {
     //dispatch(navigateToUrl('passChange'));
   };
 
-  if (data)
+  if (data !== undefined)
     return (
-      <div className="page box">
+      <div className={"page box "+loadingClass}>
         <div className="title">
           User Data
           <span className="icon has-text-danger is-large">
@@ -239,7 +242,13 @@ const UserData = () => {
         </form>
       </div>
     );
-  else return <div></div>;
+  else return(
+    <div className="page box">
+      <div className="title">
+        User Data Loading!
+      </div>
+    </div>
+  );
 };
 
 export default UserData;

@@ -1,0 +1,34 @@
+
+.spiner_rp-23423er1 {
+	display: inline-block;
+	position: fixed;
+	z-index: 999;
+	overflow: visible;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 128px;
+	height: 128px;
+	animation: spin__rp-23423er1 2s infinite linear;
+}
+
+/* Transparent Overlay */
+.spiner__rp-23423er1:before {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+@keyframes spin__rp-23423er1 {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

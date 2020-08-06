@@ -22,6 +22,15 @@ const PasswChange = () => {
 	};
 
 	const submit = () => {
+		console.log({
+			phpFunction: "changePassword",
+			userId,
+			userName,
+			userEMail,
+			userRole,
+			oldPassword: passw.currPassw,
+			newPassword: passw.newPasswA
+		});
 		postJsonRequest({
 			auToken,
 			request: {
@@ -34,6 +43,7 @@ const PasswChange = () => {
 				newPassword: passw.newPasswA
 			},
 			callBack: (lub) => { 
+				console.log(lub);
 				if(!lub.OK){
 					setCurrPass( { ok: false, title: 'Current Password is Incorrect!', class:'currPasError' });
 				}else{
@@ -76,7 +86,7 @@ const PasswChange = () => {
 			<div style={{ maxWidth: '520px'}}>
 				<div className="title">
 					Change password
-					<span class="icon has-text-danger is-large">
+					<span className="icon has-text-danger is-large">
 						<i className={ okce ? "far fa-eye" : "far fa-eye-slash" } onClick={() => setOkce(!okce)}></i>
 					</span>	
 				</div>

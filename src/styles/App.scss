@@ -1,3 +1,5 @@
+// my vars 
+
 // $footer-padding: 0.3rem 1.5rem .3rem;
 $column-gap: 0.5rem;
 $box-padding: 0.2rem;
@@ -7,15 +9,22 @@ $subtitle-family: true;
 // @import "node_modules/bulmaswatch/slate/bulmaswatch";
 // @import "node_modules/bulmaswatch/default/bulmaswatch";
 // @import "node_modules/bulmaswatch/minty/bulmaswatch";
-@import "node_modules/bulmaswatch/litera/bulmaswatch";
+// @import "node_modules/bulmaswatch/litera/bulmaswatch";
 // @import "node_modules/bulmaswatch/united/bulmaswatch";
 // @import "node_modules/bulmaswatch/materia/bulmaswatch";
 // @import "node_modules/bulmaswatch/pulse/bulmaswatch";
-// @import "node_modules/bulmaswatch/sandstone/bulmaswatch";
+@import "node_modules/bulmaswatch/sandstone/bulmaswatch";
 // @import "node_modules/bulmaswatch/simplex/bulmaswatch";
 // @import "node_modules/bulmaswatch/yeti/bulmaswatch";
 // @import "node_modules/bulmaswatch/spacelab/bulmaswatch";
 // @import "node_modules/bulmaswatch/solar/bulmaswatch";
+
+@import "Animations";
+
+:export {
+	spinerColor: $warning;
+	defaultBackground: #FFCC00;
+}
 
 body {
 	background: lightblue url("appBacground.jpg") repeat fixed center;
@@ -75,17 +84,6 @@ body {
 			// background-color: rgba(0,0,0,0.5);
 			z-index: 10;
 	}
-}
-
-.navbar-dropdown {
-	left: -78%;
-	animation: navAnimOpen .2s ease-in-out;
-}
-
-@keyframes navAnimOpen {
-0% {display: none;opacity: 0;max-height: 0;}
-1% {display: block;opacity: 0;}
-100% {opacity: 1;max-height: 396px;}
 }
 
 .footko {
