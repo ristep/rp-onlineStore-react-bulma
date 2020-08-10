@@ -9,14 +9,14 @@ import { useIsLoggedIn } from "redux/selectorHooks";
 import { NaviGator } from "routes";
 import SideCart from "components/sideCart";
 import { useCardBoxOpen } from 'redux/selectorHooks';
-import Spiner from "elements/Spiner";
+import Spinner from "elements/Spinner";
 
 // import { getCartBoxState } from "redux/selectors";
 // import { UserText } from "components/userText";
 
 function App() {
   const dispatch = useDispatch();
-  const lioggedIn = useIsLoggedIn();
+  const loggedIn = useIsLoggedIn();
   const cartBox =  useCardBoxOpen();
   const [ dinaClass, setDinaClass] = useState("column is-8");
   const loading = useSelector(getIsFetching); 
@@ -24,8 +24,8 @@ function App() {
   useEffect(() => {
     dispatch(navigateToUrl(window.location.hash));
     window.onhashchange = () => dispatch(navigateToUrl(window.location.hash));
-    // voa dodeka ne se stokme UserManagmentot
-    if (!lioggedIn)
+    // voa dodeka ne se stokme UserManagment
+    if (!loggedIn)
       dispatch(fetchToken({ userName: "anonymous", password: "anonymous" }));
   },[]);
 
@@ -53,7 +53,7 @@ function App() {
           }
         </div>
       </AppNavBar>
-      <Spiner spining={loading} />
+      <Spinner spinning={loading} />
     </div>
   );
 }

@@ -33,7 +33,7 @@ import { getToken, postJsonRequest } from "dataModules";
 // Route actions
 export const goHome = () => ({ type: GO_HOME });
 export const navigateToUrl = (url) => ({ type: NAVIGATE_TO_URL, payload: url });
-// for investigation durin development
+// for investigation during development
 // export const setInitialLocation = (location) => {
 // 	const { href, origin, protocol, host, hostname, port, pathname, search, hash} = location;
 // 	return { type: SET_WINDOW_LOCATION, payload:{ href, origin, protocol, host, hostname, port, pathname, search, hash, hashArr:hash.split("/") } }
@@ -138,7 +138,7 @@ export const fetchFoods = () => {
 			fields: ["id", "title", "description", "size", "price", "imgFileName"]
 		}
 	};
-	// returnin function is pattern for Redux_Trunk middlware
+	// returning function is pattern for Redux_Trunk middleware
 	return function (dispatch, getState) {
 		dispatch(submitRequest());
 		// console.log(jsonQuery);
@@ -157,7 +157,7 @@ export const fetchPhotoList = () => {
 			phpFunction: 'photoList'
 		}
 	};
-	// returnin function is pattern for Redux_Trunk middlware
+	// returning function is pattern for Redux_Trunk middleware
 	return function (dispatch, getState) {
 		dispatch(submitRequest());
 		console.log(jsonQuery);

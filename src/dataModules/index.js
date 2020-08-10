@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axParams = {
-	baseURL: "http://192.168.100.8/SimpJ2J/",
+	baseURL: "http://192.168.100.133/SimpJ2J/",
 	headers: {
 		"Authorization": "dummy-key",
 		"Content-type": "application/json"
@@ -26,7 +26,7 @@ export const getToken = (args) => {
 	}
 	fetchToken();
 }
-
+ 
 export const postJsonRequest = (args) => {
 	const { request, auToken, callBack } = args;
 	const fetchData = async () => {
