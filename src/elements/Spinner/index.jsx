@@ -3,7 +3,6 @@ import './style.scss';
 import { spinnerColor } from '../../styles/App.scss'; //this is for using theme color from Bulma theme
 
 import { ReactComponent as Spin } from  "./bacteria-solid.svg";
-// clean finaly
 const Spinner = (props) => {
 
 	if (props.spinning)
